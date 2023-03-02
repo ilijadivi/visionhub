@@ -86,6 +86,3 @@ RunService:BindToRenderStep("AimLock", 0, function()
     end)
     
     
-        
-    else
-print "hello"
