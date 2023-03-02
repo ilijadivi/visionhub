@@ -1,0 +1,116 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))() 
+
+
+local loadedKey = loadstring(game:HttpGet('https://raw.githubusercontent.com/ilijadivi/VisionExploit/main/scriptupdated'))()
+
+getgenv().inputKey = ""
+
+
+function LoadMain()
+   local Window = Rayfield:CreateWindow({
+      Name = "Main",
+      LoadingTitle = "Main",
+      LoadingSubtitle = "by ilija",
+      ConfigurationSaving = {
+         Enabled = true,
+         FolderName = nil, -- Create a custom folder for your hub/game
+         FileName = "Big Hub"
+      },
+      Discord = {
+         Enabled = false,
+         Invite = "SIRIUS", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+         RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+      },
+      KeySystem = false, -- Set this to true to use our key system
+      KeySettings = {
+         Title = "Sirius Hub",
+         Subtitle = "Key System",
+         Note = "Join the discord (discord.gg/sirius)",
+         FileName = "SiriusKey",
+         SaveKey = true,
+         GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+         Key = "Hello"
+      }
+   })
+end
+
+function readkey()
+   if readfile("/visionKey/key.txt") == loadedKey then
+      loadstring(game:HttpGet('https://scripts.luawl.com/17326/Vision-Dahood.lua'))()
+      Rayfield:Destroy()
+     else
+      local keyWindow = Rayfield:CreateWindow({
+         Name = "Key System",
+         LoadingTitle = "Key System",
+         LoadingSubtitle = "by ilija",
+         ConfigurationSaving = {
+            Enabled = true,
+            FolderName = nil, -- Create a custom folder for your hub/game
+            FileName = "Big Hub"
+         },
+         Discord = {
+            Enabled = true,
+            Invite = "PmT3ZHmDye", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+         },
+         KeySystem = false, -- Set this to true to use our key system
+         KeySettings = {
+            Title = "Sirius Hub",
+            Subtitle = "Key System",
+            Note = "Join the discord (discord.gg/sirius)",
+            FileName = "SiriusKey",
+            SaveKey = true,
+            GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+            Key = "Hello"
+         }
+      })
+      local Tab = keyWindow:CreateTab("Key", 4483362458)
+      local Input = Tab:CreateInput({
+         Name = "Key:",
+         PlaceholderText = "Enter Key",
+         RemoveTextAfterFocusLost = false,
+         Callback = function(Text)
+            getgenv().inputKey = Text
+         end,
+      })
+
+      local Button = Tab:CreateButton({
+         Name = "Submit Key",
+         Callback = function()
+         if getgenv().inputKey == loadedKey then
+            writefile("/visionKey/key.txt", loadedKey)
+            Rayfield:Destroy()
+            loadstring(game:HttpGet('https://scripts.luawl.com/17326/Vision-Dahood.lua'))()
+         else
+            Rayfield:Notify({
+               Title = "Incorrect Key",
+               Content = "Get the weekly Key in our Discord Server!\nPress this button to copy the Link!",
+               Duration = 6.5,
+               Image = 4483362458,
+               Actions = { -- Notification Buttons
+                  Ignore = {
+                     Name = "Copy Discord Link!",
+                     Callback = function()
+                     setclipboard("https://discord.gg/PmT3ZHmDye")
+                  end
+               },
+            },
+            })
+         end
+         end,
+      })
+     end
+end
+
+if isfolder ("/visionKey") then
+   if isfile("/visionKey/key.txt", "") then
+      readkey()
+   else
+      writefile("/visionKey/key.txt", "")
+      readkey()
+   end
+else
+   makefolder("visionKey")
+   writefile("/visionKey/key.txt", "")
+   readkey()
+end
