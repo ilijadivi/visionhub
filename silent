@@ -86,3 +86,5 @@ RunService:BindToRenderStep("AimLock", 0, function()
     end)
     
     
+    print "Vision Silent Aim is loading..."
+    
