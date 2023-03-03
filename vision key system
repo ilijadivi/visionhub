@@ -36,8 +36,8 @@ end
 
 function readkey()
    if readfile("/visionKey/key.txt") == loadedKey then
-      loadstring(game:HttpGet('https://scripts.luawl.com/17326/Vision-Dahood.lua'))()
       Rayfield:Destroy()
+      loadstring(game:HttpGet('https://scripts.luawl.com/17326/Vision-Dahood.lua'))()
      else
       local keyWindow = Rayfield:CreateWindow({
          Name = "Key System",
@@ -79,8 +79,8 @@ function readkey()
          Callback = function()
          if getgenv().inputKey == loadedKey then
             writefile("/visionKey/key.txt", loadedKey)
-            loadstring(game:HttpGet('https://scripts.luawl.com/17326/Vision-Dahood.lua'))()
             Rayfield:Destroy()
+            loadstring(game:HttpGet('https://scripts.luawl.com/17326/Vision-Dahood.lua'))()
          else
             Rayfield:Notify({
                Title = "Incorrect Key",
